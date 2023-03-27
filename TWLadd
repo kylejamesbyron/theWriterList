@@ -8,7 +8,7 @@ print("Opened database successfully");
 conn.execute("INSERT INTO COMPANY (ID,NAME,WRITER,GENRE,LOGLINE,SALARY,) \
       VALUES (1, 'Paul', 'Mark', 'Horror', 'Log', 50, )");
 
-
+print("NAME = ", row[1])
 conn.commit()
 print("Records created successfully");
 conn.close()
