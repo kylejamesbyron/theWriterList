@@ -5,4 +5,16 @@ import sqlite3
 connection = sqlite3.connect("twl.db")
 
 print(connection.total_changes)
-conn.close()
+
+print("The Script worked")
+
+cursor = connection.cursor()
+
+#comment if already created
+# cursor.execute("CREATE TABLE fish (name TEXT, species TEXT, tank_number INTEGER)")
+
+cursor.execute("INSERT INTO fish VALUES ('Sammy', 'sharks are my favorite, 1)")
+cursor.execute("INSERT INTO fish VALUES ('Jamie', 'cuttlefish', 7)")
+
+rows = cursor.execute("SELECT name, species, tank_number FROM fish").fetchall()
+print(rows)
