@@ -6,7 +6,7 @@ conn = sqlite3.connect('test.db')
 print("Opened database successfully");
 
 conn.execute("INSERT INTO COMPANY (ID, NAME, WRITER,GENRE,  ) \
-      VALUES (1, 'Paul', 'Mark Isom', 'Horror',)");
+      VALUES (1, 'Paul', 'Mark', 'Horror',)");
 
 
 conn.commit()
