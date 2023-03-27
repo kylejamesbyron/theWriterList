@@ -2,17 +2,7 @@
 
 import sqlite3
 
-conn = sqlite3.connect('test.db')
+connection = sqlite3.connect("twl.db")
 
-print("Opened database") 
-
-conn.execute('''CREATE TABLE COMPANY
-         (ID INT PRIMARY KEY     NOT NULL,
-         NAME           TEXT    NOT NULL,
-         WRITER         TEXT    NOT NULL,
-         GENRE          TEXT    NOT NULL,
-         LOGLINE        TEXT    NOT NULL,
-         SALARY         REAL);''')
-print("Table created successfully");
-
+print(connection.total_changes)
 conn.close()
