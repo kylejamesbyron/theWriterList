@@ -7,12 +7,12 @@ cursor = connection.cursor()
 # To Insert Table:
 #cursor.execute("CREATE TABLE media (title TEXT, author TEXT, media TEXT, description TEXT)") 
 
-input("title:")
+title = input("title:")
 input("author:")
 input("media:")
 input("description:")
 
-print("title")
+print(title)
 
 # To Insert Values
 cursor.execute("INSERT INTO media VALUES ('Linux Reality Podcast', 'Chess Griffin', 'Instructional', 'Apodcast for the new linux user')")
