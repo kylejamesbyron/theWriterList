@@ -15,7 +15,7 @@ input("description:")
 print(title)
 
 # To Insert Values
-cursor.execute("INSERT INTO media VALUES ('Linux Reality Podcast', 'Chess Griffin', 'Instructional', 'Apodcast for the new linux user')")
+cursor.execute("INSERT INTO media VALUES (title, author, media, description)")
 
 #To read values
 rows = cursor.execute("SELECT title, author, media, description FROM media WHERE title = ?", ('Linux Reality Podcast',),).fetchall()
