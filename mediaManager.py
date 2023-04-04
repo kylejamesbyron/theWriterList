@@ -19,7 +19,7 @@ import os
 
 def updateRecords():
     #<--print("Search by with field?:  ")
-    updateRecord = input("Title:  ")
+    # updateRecord = input("Title:  ")
     print("Which field # would you like to update?")
     print("1. Title")
     print("2. Author")
@@ -83,6 +83,7 @@ elif choice == "2":
 # Updating records
 elif choice == "3":
     print("Which record would you to update?: ")
+    updateRecord = input("Title:  ")
     updateRecords() 
 
 # Perform query and give option to update.
@@ -102,6 +103,7 @@ elif choice == "4":
         #<-- add if statement to go back to update fields.  Probably need to make 
         editAnswer = input("Would you like to edit (Y/n): ")
         if editAnswer == "Y":
+            updateRecord = input("Title of Record:  ")
             updateRecords()
             #<-- here is where we execute choice 3
         else:
@@ -142,15 +144,30 @@ elif choice == "4":
             #<-- here is where we execute choice 3
         else:
             print("Done")
-
-
-
             
 #Display Records.
 elif choice == "5":
+    
+# Testing formatting
+ 
+
+
+# This one works: #<-- see if I can export to csv
     print("Your Table: ")
-    rows = cursor.execute("SELECT title, author, media, description FROM media").fetchall()
-    print(rows)
+    selection = cursor.execute("SELECT title, author, media, description FROM media")
+    for row in selection: print(row[0], ":", row[1], ":", row[2], ":", row[3]) 
+
+
+
+# Not the way to print
+#    pTitle = cursor.execute("SELECT title FROM media").fetchall()
+#    pAuthor = cursor.execute("SELECT author FROM media").fetchall()
+#    pMedia = cursor.execute("SELECT media FROM media").fetchall()
+#    pDescription = cursor.execute("SELECT description FROM media").fetchall()
+#    print(pTitle)
+#    print(pAuthor)
+#    print(pMedia)
+#    print(pDescription)
     
 
 
