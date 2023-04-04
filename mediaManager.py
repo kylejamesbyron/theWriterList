@@ -153,9 +153,26 @@ elif choice == "5":
 
 
 # This one works: #<-- see if I can export to csv
+    os.system('clear')
     print("Your Table: ")
     selection = cursor.execute("SELECT title, author, media, description FROM media")
-    for row in selection: print(row[0], ":", row[1], ":", row[2], ":", row[3]) 
+    #for row in selection: print(row[0], ":", row[1], ":", row[2], ":", row[3]) 
+
+    for row in selection:
+        print("Title:", row[0])
+        print("Author:", row[1])
+        print("Media:", row[2])
+        print("Description:", row[3])
+        print("")
+
+
+# Example try
+#cursor = conn.execute("SELECT id, name, address, salary from COMPANY")
+#for row in cursor:
+#   print "ID = ", row[0]
+#   print "NAME = ", row[1]
+#   print "ADDRESS = ", row[2]
+#   print "SALARY = ", row[3], "\n"
 
 
 
