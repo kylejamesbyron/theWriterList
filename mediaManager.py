@@ -51,8 +51,23 @@ elif choice == "2":
         connection.commit()
     else:
         print("Not commited")
-else:
-    print("All done")
+# Updating records
+elif choice == "3":
+    print("What would you like to update?: ")
+    updateRecord = input("Title:  ")
+    print(updateRecord) # <-----TEMP
+    updateField = input("Field:  ")
+    print(updateField)
+    newInput = input("Input:  ")
+
+    cursor.execute("UPDATE media SET author = ? WHERE title = ?", (newInput, updateRecord))
+    connection.commit()
+#<-- media currently hard coded
+#<-- We should be able to search by different records other than title.
+#<-- probably going to have to write submenu for each field.
+
+
+
 
 #To read values
 #rows = cursor.execute("SELECT title, author, media, description FROM media WHERE title = ?", ('Blow',),).fetchall()
