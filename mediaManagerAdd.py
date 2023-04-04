@@ -25,7 +25,7 @@ cursor.execute("INSERT INTO media (title, author, media, description) values (?,
 connection.commit()
 
 #To read values
-rows = cursor.execute("SELECT title, author, media, description FROM media WHERE title = ?", ('Linux Reality Podcast',),).fetchall()
+rows = cursor.execute("SELECT title, author, media, description FROM media WHERE title = ?", ('Blow',),).fetchall()
 print(rows)
 
 
