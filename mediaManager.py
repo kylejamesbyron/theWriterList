@@ -1,7 +1,7 @@
 # A Script to Manage my Archive Database
 # working
 
-#? Should I add the path for python3 here.
+#<-- Should I add the path for python3 here.
 
 #importing sqlite3 and connecting to database
 
@@ -18,7 +18,7 @@ print("2. Insert Full Values")
 print("3. Update Record")
 print("4. Perform Query")
 print("5. Show Table")
-choice = input("Choice: ")
+choice = input("Choice #: ")
 
 if choice == "1":
 # To insert table
@@ -54,14 +54,31 @@ elif choice == "2":
         print("Not commited")
 # Updating records
 elif choice == "3":
-    print("What would you like to update?: ")
+    print("Which record would you to update?: ")
+#<--print("Search by with field?:  ")
     updateRecord = input("Title:  ")
-    print(updateRecord) # <-----TEMP
+    print("Which field # would you like to update?")
+    print("1. Title")
+    print("2. Author")
+    print("3. Media")
+    print("4. Description")
     updateField = input("Field:  ")
-    print(updateField)
-    newInput = input("Input:  ")
 
-    cursor.execute("UPDATE media SET author = ? WHERE title = ?", (newInput, updateRecord))
+# Update Title
+    if updateField == "1":
+        newTitle = input("New Title: ")
+        cursor.execute("UPDATE media SET title = ? WHERE title = ?", (newTitle, updateRecord))
+    elif updateField == "2":
+        newAuthor == input("New Author: ")
+        cursor.execute("UPDATE media SET author = ? WHERE title = ?", (newAuthor, updateRecord))
+    elif updateField == "3"
+        newMedia = input("New Media: ")
+        cursor.execute("UPDATE media SET media = ? WHERE title = ?", (newMedia, updateRecord))
+    elif updateField == "4"
+        newDescription = input("New Description: ")
+        cursor.execute("UPDATE media SET author = ? WHERE title = ?", (newDescription, updateRecord))
+
+ #   cursor.execute("UPDATE media SET author = ? WHERE title = ?", (newInput, updateRecord))
     connection.commit()
 #<-- media currently hard coded
 #<-- We should be able to search by different records other than title.
@@ -75,8 +92,8 @@ elif choice == "3":
 #print(rows)
 
 # Show full table
-cursor.execute("SELECT * FROM media")
-print(cursor.fetchall)
+#cursor.execute("SELECT * FROM media")
+#print(cursor.fetchall)
 
 
 print("Total Changes:  ")
