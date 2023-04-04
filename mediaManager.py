@@ -69,14 +69,14 @@ elif choice == "3":
         newTitle = input("New Title: ")
         cursor.execute("UPDATE media SET title = ? WHERE title = ?", (newTitle, updateRecord))
     elif updateField == "2":
-        newAuthor == input("New Author: ")
+        newAuthor = input("New Author: ")
         cursor.execute("UPDATE media SET author = ? WHERE title = ?", (newAuthor, updateRecord))
-    elif updateField == "3"
+    elif updateField == "3":
         newMedia = input("New Media: ")
         cursor.execute("UPDATE media SET media = ? WHERE title = ?", (newMedia, updateRecord))
-    elif updateField == "4"
+    elif updateField == "4":
         newDescription = input("New Description: ")
-        cursor.execute("UPDATE media SET author = ? WHERE title = ?", (newDescription, updateRecord))
+        cursor.execute("UPDATE media SET description = ? WHERE title = ?", (newDescription, updateRecord))
 
  #   cursor.execute("UPDATE media SET author = ? WHERE title = ?", (newInput, updateRecord))
     connection.commit()
