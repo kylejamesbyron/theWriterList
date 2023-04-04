@@ -5,8 +5,8 @@ connection = sqlite3.connect("tester.db")
 cursor = connection.cursor()
 
 # Show full table
-connection.execute("SELECT * FROM media")
-print(connection.fetchall)
+cursor.execute("SELECT * FROM media")
+print(cursor.fetchall())
 
 
 print("Total Changes:  ")
