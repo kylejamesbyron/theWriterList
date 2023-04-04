@@ -97,6 +97,8 @@ elif choice == "4":
         editAnswer = input("Would you like to edit (Y/n): ")
         if editAnswer == "Y":
             #<-- here is where we execute choice 3
+        elif
+            print("Done")
 
 
 #Display Records.
