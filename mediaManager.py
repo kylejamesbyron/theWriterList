@@ -39,7 +39,7 @@ def updateRecords():
     elif updateField == "4":
         newDescription = input("New Description: ")
         cursor.execute("UPDATE media SET description = ? WHERE title = ?", (newDescription, updateRecord))
-
+    connection.commit() 
 print("Welcome to Media Manager")
 print("1. Insert Table")
 print("2. Insert Full Values")
