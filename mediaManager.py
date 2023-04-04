@@ -15,6 +15,31 @@ import os
 # Maybe junk
 #import pandas as pd 
 
+# Defining functions
+
+def updateRecords()
+    #<--print("Search by with field?:  ")
+    updateRecord = input("Title:  ")
+    print("Which field # would you like to update?")
+    print("1. Title")
+    print("2. Author")
+    print("3. Media")
+    print("4. Description")
+    updateField = input("Field:  ")
+# Update Fields
+    if updateField == "1":
+        newTitle = input("New Title: ")
+        cursor.execute("UPDATE media SET title = ? WHERE title = ?", (newTitle, updateRecord))
+    elif updateField == "2":
+        newAuthor = input("New Author: ")
+        cursor.execute("UPDATE media SET author = ? WHERE title = ?", (newAuthor, updateRecord))
+    elif updateField == "3":
+        newMedia = input("New Media: ")
+        cursor.execute("UPDATE media SET media = ? WHERE title = ?", (newMedia, updateRecord))
+    elif updateField == "4":
+        newDescription = input("New Description: ")
+        cursor.execute("UPDATE media SET description = ? WHERE title = ?", (newDescription, updateRecord))
+
 print("Welcome to Media Manager")
 print("1. Insert Table")
 print("2. Insert Full Values")
@@ -58,28 +83,8 @@ elif choice == "2":
 # Updating records
 elif choice == "3":
     print("Which record would you to update?: ")
-#<--print("Search by with field?:  ")
-    updateRecord = input("Title:  ")
-    print("Which field # would you like to update?")
-    print("1. Title")
-    print("2. Author")
-    print("3. Media")
-    print("4. Description")
-    updateField = input("Field:  ")
-# Update Fields
-    if updateField == "1":
-        newTitle = input("New Title: ")
-        cursor.execute("UPDATE media SET title = ? WHERE title = ?", (newTitle, updateRecord))
-    elif updateField == "2":
-        newAuthor = input("New Author: ")
-        cursor.execute("UPDATE media SET author = ? WHERE title = ?", (newAuthor, updateRecord))
-    elif updateField == "3":
-        newMedia = input("New Media: ")
-        cursor.execute("UPDATE media SET media = ? WHERE title = ?", (newMedia, updateRecord))
-    elif updateField == "4":
-        newDescription = input("New Description: ")
-        cursor.execute("UPDATE media SET description = ? WHERE title = ?", (newDescription, updateRecord))
-
+    updateRecords() 
+    
 # Perform query and give option to update.
 elif choice == "4":
     print("Look for Record: ")
@@ -97,7 +102,7 @@ elif choice == "4":
         editAnswer = input("Would you like to edit (Y/n): ")
         if editAnswer == "Y":
             #<-- here is where we execute choice 3
-        elif
+        else
             print("Done")
 
 
