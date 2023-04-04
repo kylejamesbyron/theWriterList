@@ -94,6 +94,7 @@ elif choice == "4":
     print("3. Media")
     print("4. Description")
     searchField = input("Search Field: ")
+# search by title    
     if searchField == "1":
         searchTitle = input("Title: ")
         rows = cursor.execute("SELECT title, author, media, description FROM media WHERE title = ?", (searchTitle,),).fetchall()
@@ -101,12 +102,50 @@ elif choice == "4":
         #<-- add if statement to go back to update fields.  Probably need to make 
         editAnswer = input("Would you like to edit (Y/n): ")
         if editAnswer == "Y":
-            print("Edit Answer")
+            updateRecords()
+            #<-- here is where we execute choice 3
+        else:
+            print("Done")
+# search by author
+    if searchField == "2":
+        searchTitle = input("Author: ")
+        rows = cursor.execute("SELECT title, author, media, description FROM media WHERE author = ?", (searchTitle,),).fetchall()
+        print(rows)
+        #<-- add if statement to go back to update fields.  Probably need to make 
+        editAnswer = input("Would you like to edit (Y/n): ")
+        if editAnswer == "Y":
+            updateRecords()
+            #<-- here is where we execute choice 3
+        else:
+            print("Done")
+# search by media
+    if searchField == "3":
+        searchTitle = input("Media: ")
+        rows = cursor.execute("SELECT title, author, media, description FROM media WHERE media = ?", (searchTitle,),).fetchall()
+        print(rows)
+        #<-- add if statement to go back to update fields.  Probably need to make 
+        editAnswer = input("Would you like to edit (Y/n): ")
+        if editAnswer == "Y":
+            updateRecords()
+            #<-- here is where we execute choice 3
+        else:
+            print("Done")
+# search by description
+    if searchField == "4":
+        searchTitle = input("Description: ")
+        rows = cursor.execute("SELECT title, author, media, description FROM media WHERE description = ?", (searchTitle,),).fetchall()
+        print(rows)
+        #<-- add if statement to go back to update fields.  Probably need to make 
+        editAnswer = input("Would you like to edit (Y/n): ")
+        if editAnswer == "Y":
+            updateRecords()
             #<-- here is where we execute choice 3
         else:
             print("Done")
 
 
+
+            
 #Display Records.
 elif choice == "5":
     print("Your Table: ")
