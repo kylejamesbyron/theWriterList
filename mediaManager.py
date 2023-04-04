@@ -17,7 +17,7 @@ import os
 
 # Defining functions
 
-def updateRecords()
+def updateRecords():
     #<--print("Search by with field?:  ")
     updateRecord = input("Title:  ")
     print("Which field # would you like to update?")
@@ -84,7 +84,7 @@ elif choice == "2":
 elif choice == "3":
     print("Which record would you to update?: ")
     updateRecords() 
-    
+
 # Perform query and give option to update.
 elif choice == "4":
     print("Look for Record: ")
