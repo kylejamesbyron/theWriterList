@@ -12,6 +12,9 @@ cursor = connection.cursor()
 #import linux os calls
 import os
 
+# Maybe junk
+#import pandas as pd 
+
 print("Welcome to Media Manager")
 print("1. Insert Table")
 print("2. Insert Full Values")
@@ -63,8 +66,7 @@ elif choice == "3":
     print("3. Media")
     print("4. Description")
     updateField = input("Field:  ")
-
-# Update Title
+# Update Fields
     if updateField == "1":
         newTitle = input("New Title: ")
         cursor.execute("UPDATE media SET title = ? WHERE title = ?", (newTitle, updateRecord))
@@ -78,7 +80,46 @@ elif choice == "3":
         newDescription = input("New Description: ")
         cursor.execute("UPDATE media SET description = ? WHERE title = ?", (newDescription, updateRecord))
 
+# Perform query and give option to update.
+elif choice == "4":
+    print("Look for Record: ")
+    print("Which field # would you like to search?")
+    print("1. Title")
+    print("2. Author")
+    print("3. Media")
+    print("4. Description")
+    searchField = input("Search Field: ")
+    if searchField == "1":
+        searchTitle = input("Title: ")
+        rows = cursor.execute("SELECT title, author, media, description FROM media WHERE title = ?", (searchTitle,),).fetchall()
+        print(rows)
+        #<-- add if statement to go back to update fields.  Probably need to make 
+        editAnswer = input("Would you like to edit (Y/n): ")
+        if editAnswer == "Y":
+            #<-- here is where we execute choice 3
+
+
+#Display Records.
+elif choice == "5":
+    print("Your Table: ")
+    rows = cursor.execute("SELECT title, author, media, description FROM media").fetchall()
+    print(rows)
+    
+
+
+
+
+
+# formatted_row = '{:<10} {:<6} {:>6} {:>6} {:<9} {:<9}'
+#print(formatted_row.format("Name", "Gender", "Age", "Score", "Date", "Time"))
+# for Row in Data:
+ #   print(formatted_row.format(*Row))
+ #   cursor.execute("SELECT title, author, media, description FROM media").fetchall()
  #   cursor.execute("UPDATE media SET author = ? WHERE title = ?", (newInput, updateRecord))
+
+
+
+
     connection.commit()
 #<-- media currently hard coded
 #<-- We should be able to search by different records other than title.
