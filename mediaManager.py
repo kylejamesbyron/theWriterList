@@ -31,13 +31,13 @@ def updateRecords():
     selection = cursor.execute("SELECT id, title, author, genre, description FROM media")
     #for row in selection: print(row[0], ":", row[1], ":", row[2], ":", row[3]) 
 
-        for row in selection:
-            print("ID:", row[0])
-            print("Title:", row[1])
-            print("Author:", row[2])
-            print("Genre:", row[3])
-            print("Description:", row[4])
-            print("")
+    for row in selection:
+        print("ID:", row[0])
+        print("Title:", row[1])
+        print("Author:", row[2])
+        print("Genre:", row[3])
+        print("Description:", row[4])
+        print("")
 #---------------------------------------------------#
     updateRecord = input("Title:  ")
     print("Which field # would you like to update?")
