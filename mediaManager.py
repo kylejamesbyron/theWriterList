@@ -40,6 +40,10 @@ def updateRecords():
         newDescription = input("New Description: ")
         cursor.execute("UPDATE media SET description = ? WHERE title = ?", (newDescription, updateRecord))
     connection.commit() 
+
+
+
+# --------->BEGIN PROGRAM<--------------- #    
 print("Welcome to Media Manager")
 print("1. Insert Table")
 print("2. Insert Full Values")
@@ -52,7 +56,7 @@ if choice == "1":
 # To insert table
     tableName = input("Table Name: ")
     #input headers as list
-    cursor.execute("CREATE TABLE media (title TEXT, author TEXT, genre TEXT, description TEXT)") 
+    cursor.execute("CREATE TABLE media (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, author TEXT, genre TEXT, description TEXT)") 
 
 elif choice == "2":
 # To add values
