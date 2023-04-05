@@ -134,12 +134,18 @@ def mediamanager():
     # search by title    
         if searchField == "1":
             searchTitle = input("Title: ")
-            rows = cursor.execute("SELECT title, author, genre, description FROM media WHERE title = ?", (searchTitle,),).fetchall()
-            print(rows)
+            rows = cursor.execute("SELECT id, title, author, genre, description FROM media WHERE title = ?", (searchTitle,),).fetchall()
+            for row in rows:
+                print("ID:", row[0])
+                print("Title:", row[1])
+                print("Author:", row[2])
+                print("Genre:", row[3])
+                print("Description:", row[4])
+                print("")
             #<-- add if statement to go back to update fields.  Probably need to make 
             editAnswer = input("Would you like to edit (Y/n): ")
             if editAnswer == "Y":
-                updateRecord = input("Title of Record:  ")
+             #   updateRecord = input("Title of Record:  ")
                 updateRecords()
                 #<-- here is where we execute choice 3
             else:
@@ -147,8 +153,14 @@ def mediamanager():
     # search by author
         if searchField == "2":
             searchTitle = input("Author: ")
-            rows = cursor.execute("SELECT title, author, genre, description FROM media WHERE author = ?", (searchTitle,),).fetchall()
-            print(rows)
+            rows = cursor.execute("SELECT id, title, author, genre, description FROM media WHERE author = ?", (searchTitle,),).fetchall()
+            for row in rows:    
+                print("ID:", row[0])
+                print("Title:", row[1])
+                print("Author:", row[2])
+                print("Genre:", row[3])
+                print("Description:", row[4])
+                print("")
             #<-- add if statement to go back to update fields.  Probably need to make 
             editAnswer = input("Would you like to edit (Y/n): ")
             if editAnswer == "Y":
@@ -159,8 +171,14 @@ def mediamanager():
     # search by genre
         if searchField == "3":
             searchTitle = input("Genre: ")
-            rows = cursor.execute("SELECT title, author, genre, description FROM media WHERE genre = ?", (searchTitle,),).fetchall()
-            print(rows)
+            rows = cursor.execute("SELECT id, title, author, genre, description FROM media WHERE genre = ?", (searchTitle,),).fetchall()
+            for row in rows:    
+                print("ID:", row[0])
+                print("Title:", row[1])
+                print("Author:", row[2])
+                print("Genre:", row[3])
+                print("Description:", row[4])
+                print("")
             #<-- add if statement to go back to update fields.  Probably need to make 
             editAnswer = input("Would you like to edit (Y/n): ")
             if editAnswer == "Y":
@@ -171,8 +189,14 @@ def mediamanager():
     # search by description
         if searchField == "4":
             searchTitle = input("Description: ")
-            rows = cursor.execute("SELECT title, author, genre, description FROM media WHERE description = ?", (searchTitle,),).fetchall()
-            print(rows)
+            rows = cursor.execute("SELECT id, title, author, genre, description FROM media WHERE description = ?", (searchTitle,),).fetchall()
+            for row in rows: 
+                print("ID:", row[0])
+                print("Title:", row[1])
+                print("Author:", row[2])
+                print("Genre:", row[3])
+                print("Description:", row[4])
+                print("")
             #<-- add if statement to go back to update fields.  Probably need to make 
             editAnswer = input("Would you like to edit (Y/n): ")
             if editAnswer == "Y":
