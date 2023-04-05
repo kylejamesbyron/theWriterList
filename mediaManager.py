@@ -28,8 +28,8 @@ def updateRecords():
     #<--print("Search by with field?:  ")
 #-------------------------------------------------#
     print("Your Table: ")
-        selection = cursor.execute("SELECT id, title, author, genre, description FROM media")
-        #for row in selection: print(row[0], ":", row[1], ":", row[2], ":", row[3]) 
+    selection = cursor.execute("SELECT id, title, author, genre, description FROM media")
+    #for row in selection: print(row[0], ":", row[1], ":", row[2], ":", row[3]) 
 
         for row in selection:
             print("ID:", row[0])
