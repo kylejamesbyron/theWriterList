@@ -26,15 +26,32 @@ def continueExit():
 # ------------------UPDATE RECORDS FUNCTION----------------#
 def updateRecords():
     #<--print("Search by with field?:  ")
+#-------------------------------------------------#
+    print("Your Table: ")
+        selection = cursor.execute("SELECT id, title, author, genre, description FROM media")
+        #for row in selection: print(row[0], ":", row[1], ":", row[2], ":", row[3]) 
+
+        for row in selection:
+            print("ID:", row[0])
+            print("Title:", row[1])
+            print("Author:", row[2])
+            print("Genre:", row[3])
+            print("Description:", row[4])
+            print("")
+#---------------------------------------------------#
     updateRecord = input("Title:  ")
     print("Which field # would you like to update?")
+    print("0. ID")
     print("1. Title")
     print("2. Author")
     print("3. Genre")
     print("4. Description")
     updateField = input("Field:  ")
 # Update Fields
-    if updateField == "1":
+    if updateField == "0":
+        newID = input("New ID: ")
+        cursor.execute("UPDATE media SET id = ? WHERE title = ?", (newID, updateRecord))
+    elif updateField == "1":
         newTitle = input("New Title: ")
         cursor.execute("UPDATE media SET title = ? WHERE title = ?", (newTitle, updateRecord))
     elif updateField == "2":
@@ -92,6 +109,7 @@ def mediamanager():
             connection.commit()
         else:
             print("Not commited")
+
     # Updating records
     elif choice == "3":
         print("Which record would you to update?: ")
