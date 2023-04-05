@@ -39,7 +39,7 @@ def updateRecords():
         print("Description:", row[4])
         print("")
 #---------------------------------------------------#
-    updateRecord = input("Title:  ")
+    updateRecord = input("ID to edit:  ")
     print("Which field # would you like to update?")
     print("0. ID")
     print("1. Title")
@@ -50,19 +50,19 @@ def updateRecords():
 # Update Fields
     if updateField == "0":
         newID = input("New ID: ")
-        cursor.execute("UPDATE media SET id = ? WHERE title = ?", (newID, updateRecord))
+        cursor.execute("UPDATE media SET id = ? WHERE id = ?", (newID, updateRecord))
     elif updateField == "1":
         newTitle = input("New Title: ")
-        cursor.execute("UPDATE media SET title = ? WHERE title = ?", (newTitle, updateRecord))
+        cursor.execute("UPDATE media SET title = ? WHERE id = ?", (newTitle, updateRecord))
     elif updateField == "2":
         newAuthor = input("New Author: ")
-        cursor.execute("UPDATE media SET author = ? WHERE title = ?", (newAuthor, updateRecord))
+        cursor.execute("UPDATE media SET author = ? WHERE id = ?", (newAuthor, updateRecord))
     elif updateField == "3":
         newGenre = input("New Genre: ")
-        cursor.execute("UPDATE media SET genre = ? WHERE title = ?", (newGenre, updateRecord))
+        cursor.execute("UPDATE media SET genre = ? WHERE id = ?", (newGenre, updateRecord))
     elif updateField == "4":
         newDescription = input("New Description: ")
-        cursor.execute("UPDATE media SET description = ? WHERE title = ?", (newDescription, updateRecord))
+        cursor.execute("UPDATE media SET description = ? WHERE id = ?", (newDescription, updateRecord))
     connection.commit() 
 
 
