@@ -23,7 +23,7 @@ def updateRecords():
     print("Which field # would you like to update?")
     print("1. Title")
     print("2. Author")
-    print("3. Media")
+    print("3. Genre")
     print("4. Description")
     updateField = input("Field:  ")
 # Update Fields
@@ -34,8 +34,8 @@ def updateRecords():
         newAuthor = input("New Author: ")
         cursor.execute("UPDATE media SET author = ? WHERE title = ?", (newAuthor, updateRecord))
     elif updateField == "3":
-        newMedia = input("New Media: ")
-        cursor.execute("UPDATE media SET media = ? WHERE title = ?", (newMedia, updateRecord))
+        newGenre = input("New Genre: ")
+        cursor.execute("UPDATE media SET genre = ? WHERE title = ?", (newGenre, updateRecord))
     elif updateField == "4":
         newDescription = input("New Description: ")
         cursor.execute("UPDATE media SET description = ? WHERE title = ?", (newDescription, updateRecord))
@@ -52,13 +52,13 @@ if choice == "1":
 # To insert table
     tableName = input("Table Name: ")
     #input headers as list
-    cursor.execute("CREATE TABLE media (title TEXT, author TEXT, media TEXT, description TEXT)") 
+    cursor.execute("CREATE TABLE media (title TEXT, author TEXT, genre TEXT, description TEXT)") 
 
 elif choice == "2":
 # To add values
     title = input("title:")
     author = input("author:")
-    media = input("media:")
+    genre = input("genre:")
     description = input("description:")
     os.system('clear')
     print("RECORD TO REVIEW:")
@@ -66,16 +66,16 @@ elif choice == "2":
     print(title)
     print('Author:')
     print(author)
-    print('Media:')
-    print(media)
+    print('Genre:')
+    print(genre)
     print('Description:')
     print(description)
     okay = input("Type OK to commit: ")
  #  To commit changes
     if okay == "OK":
 # To Insert Values
-        cursor.execute("INSERT INTO media (title, author, media, description) values (?, ?, ?, ?)", 
-		  (title, author, media, description))
+        cursor.execute("INSERT INTO media (title, author, genre, description) values (?, ?, ?, ?)", 
+		  (title, author, genre, description))
 #commit connection:
         connection.commit()
     else:
@@ -92,13 +92,13 @@ elif choice == "4":
     print("Which field # would you like to search?")
     print("1. Title")
     print("2. Author")
-    print("3. Media")
+    print("3. Genre")
     print("4. Description")
     searchField = input("Search Field: ")
 # search by title    
     if searchField == "1":
         searchTitle = input("Title: ")
-        rows = cursor.execute("SELECT title, author, media, description FROM media WHERE title = ?", (searchTitle,),).fetchall()
+        rows = cursor.execute("SELECT title, author, genre, description FROM media WHERE title = ?", (searchTitle,),).fetchall()
         print(rows)
         #<-- add if statement to go back to update fields.  Probably need to make 
         editAnswer = input("Would you like to edit (Y/n): ")
@@ -111,7 +111,7 @@ elif choice == "4":
 # search by author
     if searchField == "2":
         searchTitle = input("Author: ")
-        rows = cursor.execute("SELECT title, author, media, description FROM media WHERE author = ?", (searchTitle,),).fetchall()
+        rows = cursor.execute("SELECT title, author, genre, description FROM media WHERE author = ?", (searchTitle,),).fetchall()
         print(rows)
         #<-- add if statement to go back to update fields.  Probably need to make 
         editAnswer = input("Would you like to edit (Y/n): ")
@@ -120,10 +120,10 @@ elif choice == "4":
             #<-- here is where we execute choice 3
         else:
             print("Done")
-# search by media
+# search by genre
     if searchField == "3":
-        searchTitle = input("Media: ")
-        rows = cursor.execute("SELECT title, author, media, description FROM media WHERE media = ?", (searchTitle,),).fetchall()
+        searchTitle = input("Genre: ")
+        rows = cursor.execute("SELECT title, author, genre, description FROM media WHERE genre = ?", (searchTitle,),).fetchall()
         print(rows)
         #<-- add if statement to go back to update fields.  Probably need to make 
         editAnswer = input("Would you like to edit (Y/n): ")
@@ -135,7 +135,7 @@ elif choice == "4":
 # search by description
     if searchField == "4":
         searchTitle = input("Description: ")
-        rows = cursor.execute("SELECT title, author, media, description FROM media WHERE description = ?", (searchTitle,),).fetchall()
+        rows = cursor.execute("SELECT title, author, genre, description FROM media WHERE description = ?", (searchTitle,),).fetchall()
         print(rows)
         #<-- add if statement to go back to update fields.  Probably need to make 
         editAnswer = input("Would you like to edit (Y/n): ")
@@ -155,13 +155,13 @@ elif choice == "5":
 # This one works: #<-- see if I can export to csv
     os.system('clear')
     print("Your Table: ")
-    selection = cursor.execute("SELECT title, author, media, description FROM media")
+    selection = cursor.execute("SELECT title, author, genre, description FROM media")
     #for row in selection: print(row[0], ":", row[1], ":", row[2], ":", row[3]) 
 
     for row in selection:
         print("Title:", row[0])
         print("Author:", row[1])
-        print("Media:", row[2])
+        print("Genre:", row[2])
         print("Description:", row[3])
         print("")
 
@@ -179,11 +179,11 @@ elif choice == "5":
 # Not the way to print
 #    pTitle = cursor.execute("SELECT title FROM media").fetchall()
 #    pAuthor = cursor.execute("SELECT author FROM media").fetchall()
-#    pMedia = cursor.execute("SELECT media FROM media").fetchall()
+#    pGenre = cursor.execute("SELECT genre FROM media").fetchall()
 #    pDescription = cursor.execute("SELECT description FROM media").fetchall()
 #    print(pTitle)
 #    print(pAuthor)
-#    print(pMedia)
+#    print(pGenre)
 #    print(pDescription)
     
 
@@ -195,7 +195,7 @@ elif choice == "5":
 #print(formatted_row.format("Name", "Gender", "Age", "Score", "Date", "Time"))
 # for Row in Data:
  #   print(formatted_row.format(*Row))
- #   cursor.execute("SELECT title, author, media, description FROM media").fetchall()
+ #   cursor.execute("SELECT title, author, genre, description FROM media").fetchall()
  #   cursor.execute("UPDATE media SET author = ? WHERE title = ?", (newInput, updateRecord))
 
 
@@ -210,7 +210,7 @@ elif choice == "5":
 
 
 #To read values
-#rows = cursor.execute("SELECT title, author, media, description FROM media WHERE title = ?", ('Blow',),).fetchall()
+#rows = cursor.execute("SELECT title, author, genre, description FROM media WHERE title = ?", ('Blow',),).fetchall()
 #print(rows)
 
 # Show full table
