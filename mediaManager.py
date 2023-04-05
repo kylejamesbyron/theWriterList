@@ -69,26 +69,30 @@ def updateRecords():
 
 # --------->BEGIN PROGRAM Function<--------------- #    
 def mediamanager():
-    print("Welcome to Media Manager")
+    os.system('clear')
+    print("WELCOME TO MEDIA MANAGER")
     print("1. Insert Table")
     print("2. Insert Full Values")
     print("3. Update Record")
     print("4. Perform Query")
     print("5. Show Table")
+    print("6. Exit")
     choice = input("Choice #: ")
 
     if choice == "1":
     # To insert table
+        os.system('clear')
         tableName = input("Table Name: ")
         #input headers as list
         cursor.execute("CREATE TABLE media (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, author TEXT, genre TEXT, description TEXT)") 
 
     elif choice == "2":
     # To add values
-        title = input("title:")
-        author = input("author:")
-        genre = input("genre:")
-        description = input("description:")
+        os.system('clear')
+        title = input("title: ")
+        author = input("author: ")
+        genre = input("genre: ")
+        description = input("description: ")
         os.system('clear')
         print("RECORD TO REVIEW:")
         print('Title:')
@@ -112,12 +116,14 @@ def mediamanager():
 
     # Updating records
     elif choice == "3":
+        os.system('clear')
         print("Which record would you to update?: ")
         #updateRecord = input("Title:  ")
         updateRecords() 
 
     # Perform query and give option to update.
     elif choice == "4":
+        os.system('clear')
         print("Look for Record: ")
         print("Which field # would you like to search?")
         print("1. Title")
@@ -194,7 +200,10 @@ def mediamanager():
             print("Description:", row[4])
             print("")
      
-    
+    #EXIT
+    else:
+        os.system('clear')
+        exit()
 
 
     # Example try
