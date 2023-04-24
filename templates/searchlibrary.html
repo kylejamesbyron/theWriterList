@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  <title></title>
+
+  
+</head><body>
+{% extends 'base.html' %}
+<br>
+
+<br>
+
+{% block content %}
+SEARCH BY:
+
+<form action="/titlesearch" method="post"> 
+    
+  Title: <br><textarea cols="25" rows="1" name="title"></textarea>&nbsp;<br>
+
+  <input name="form" value="Save" type="submit"> 
+
+<form action="/titlesearch" method="post"> 
+    
+  First Name: <br><textarea cols="25" rows="1" name="writerfirst"></textarea>&nbsp;<br>
+
+  <input name="form" value="Save" type="submit">
+
+<form action="/titlesearch" method="post"> 
+    
+  Last Name: <br><textarea cols="25" rows="1" name="writerlast"></textarea>&nbsp;<br>
+
+  <input name="form" value="Save" type="submit">
+
+<form action="/titlesearch" method="post"> 
+    
+  Logline: <br><textarea cols="25" rows="1" name="logline"></textarea>&nbsp;<br>
+
+  <input name="form" value="Save" type="submit">
+
+</form>
+
+{% endblock %}
+

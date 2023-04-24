@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<body>
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% for row in rows %}
+
+  {{row['title']}}<br> 
+  by {{row['writerfirst']}} {{row['writerlast']}}<br>
+  "{{row['logline']}}"<br>
+  <br>
+  {{row['synopsis']}}<br><br>
+
+<a href = "/editrecord/{{row['ID']}}">[edit record]</a><br>
+<br>###<br>
+
+
+{% endfor %}
+
+
+
+
+{% endblock %}
+</body></html>

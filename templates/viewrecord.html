@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<body>
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% for row in rows %}
+
+  {{row['title']}}<br> 
+  by {{row['writerfirst']}} {{row['writerlast']}}<br>
+  "{{row['logline']}}"<br>
+  <br>
+  {{row['synopsis']}}<br><br>
+
+<a href = "/editrecord/{{row['ID']}}">[edit record]</a><br>
+
+
+{% endfor %}
+<br>NOTES:<br>
+{% for row in m %}
+
+
+
+
+{{row['entrydate']}} -- {{row['message']}}<br><br>
+
+{% endfor %}
+
+{% for row in rows %}
+<form action="/newnote/{{row['ID']}}" method="post"> 
+    
+Note: <br><textarea cols="50" rows="4" name="message"></textarea>&nbsp;<br>
+ 
+  <input name="form" value="Save" type="submit"> 
+{% endfor %}
+
+</form>
+
+
+
+{% endblock %}
+</body></html>
