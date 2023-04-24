@@ -14,28 +14,50 @@ SEARCH BY:
 
 <form action="/titlesearch" method="post"> 
     
-  Title: <br><textarea cols="25" rows="1" name="title"></textarea>&nbsp;<br>
+  Title: <textarea cols="25" rows="1" name="search"></textarea>&nbsp;
 
-  <input name="form" value="Save" type="submit"> 
+  <input name="form" value="Search" type="submit"><br> 
+  </form>
 
-<form action="/titlesearch" method="post"> 
+<form action="/writerfirstsearch" method="post"> 
     
-  First Name: <br><textarea cols="25" rows="1" name="writerfirst"></textarea>&nbsp;<br>
+  First Name: <textarea cols="25" rows="1" name="search"></textarea>&nbsp;
 
-  <input name="form" value="Save" type="submit">
+  <input name="form" value="Search" type="submit"><br>
+  </form>
 
-<form action="/titlesearch" method="post"> 
+<form action="/writerlastsearch" method="post"> 
     
-  Last Name: <br><textarea cols="25" rows="1" name="writerlast"></textarea>&nbsp;<br>
+  Last Name: <textarea cols="25" rows="1" name="search"></textarea>&nbsp;
 
-  <input name="form" value="Save" type="submit">
+  <input name="form" value="Search" type="submit"><br>
+  </form>
 
-<form action="/titlesearch" method="post"> 
+<form action="/loglinesearch" method="post"> 
     
-  Logline: <br><textarea cols="25" rows="1" name="logline"></textarea>&nbsp;<br>
+  Logline: <textarea cols="25" rows="1" name="search"></textarea>&nbsp;
 
-  <input name="form" value="Save" type="submit">
+  <input name="form" value="Search" type="submit"><br>
 
+</form>
+
+<form action="/synopsissearch" method="post"> 
+    
+  Synopsis: <textarea cols="25" rows="1" name="search"></textarea>&nbsp;
+
+  <input name="form" value="Search" type="submit"><br>
+
+</form>
+
+<form action="/genresearch" method="post"> 
+Genre:
+  <select name="search" id="genre">
+  <option value="genre">genre</option>
+  <option value="comedy">comedy</option>
+  <option value="romance">romance</option>
+  <option value="action">action</option>
+</select>
+<input name="form" value="Search" type="submit"><br>
 </form>
 
 {% endblock %}

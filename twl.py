@@ -124,35 +124,111 @@ def updaterecord(ID):
 	site = "/viewrecord/" + (userid)
 	return redirect(site)
 
+# Search:
 @app.route('/home/searchlibrary')
 def searchlibary():
 	return render_template('searchlibrary.html')
 
 @app.route('/titlesearch', methods=['POST'])
-def search():
-	searchtitle = request.form['title']
+def titlesearch():
+	#searchtitle = request.form['title']
+	searchtitle = "%" + (request.form['search']) + "%"
+	print(searchtitle)
 	import sqlite3
 	connection = sqlite3.connect("twl.db")
 	connection.row_factory = sqlite3.Row
 	cursor = connection.cursor()
-	#cursor.execute("SELECT * FROM library WHERE title = ?", [title])
-	#rows = cursor.fetchall()
-	#cursor.execute("SELECT * FROM library WHERE instr(title, ?) > 0", [searchtitle])
-	cursor.execute("SELECT * FROM library WHERE title LIKE '%searchtitle%'")
+	cursor.execute("SELECT * FROM library WHERE title LIKE ?", (searchtitle,))
+	rows = cursor.fetchall()
+	return render_template('searchresults.html', rows=rows)
+
+@app.route('/writerfirstsearch', methods=['POST'])
+def writerfirstsearch():
+	#searchtitle = request.form['title']
+	searchtitle = "%" + (request.form['search']) + "%"
+	print(searchtitle)
+	import sqlite3
+	connection = sqlite3.connect("twl.db")
+	connection.row_factory = sqlite3.Row
+	cursor = connection.cursor()
+	cursor.execute("SELECT * FROM library WHERE writerfirst LIKE ?", (searchtitle,))
+	rows = cursor.fetchall()
+	return render_template('searchresults.html', rows=rows)
+
+@app.route('/writerlastsearch', methods=['POST'])
+def writerlastsearch():
+	#searchtitle = request.form['title']
+	searchtitle = "%" + (request.form['search']) + "%"
+	print(searchtitle)
+	import sqlite3
+	connection = sqlite3.connect("twl.db")
+	connection.row_factory = sqlite3.Row
+	cursor = connection.cursor()
+	cursor.execute("SELECT * FROM library WHERE writerlast LIKE ?", (searchtitle,))
+	rows = cursor.fetchall()
+	return render_template('searchresults.html', rows=rows)
+
+@app.route('/loglinesearch', methods=['POST'])
+def loglinesearch():
+	#searchtitle = request.form['title']
+	searchtitle = "%" + (request.form['search']) + "%"
+	print(searchtitle)
+	import sqlite3
+	connection = sqlite3.connect("twl.db")
+	connection.row_factory = sqlite3.Row
+	cursor = connection.cursor()
+	cursor.execute("SELECT * FROM library WHERE logline LIKE ?", (searchtitle,))
 	rows = cursor.fetchall()
 	return render_template('searchresults.html', rows=rows)
 
 
+@app.route('/synopsissearch', methods=['POST'])
+def synopsissearch():
+	#searchtitle = request.form['title']
+	searchtitle = "%" + (request.form['search']) + "%"
+	print(searchtitle)
+	import sqlite3
+	connection = sqlite3.connect("twl.db")
+	connection.row_factory = sqlite3.Row
+	cursor = connection.cursor()
+	cursor.execute("SELECT * FROM library WHERE synopsis LIKE ?", (searchtitle,))
+	rows = cursor.fetchall()
+	return render_template('searchresults.html', rows=rows)
+
+@app.route('/genresearch', methods=['POST'])
+def genresearch():
+	#searchtitle = request.form['title']
+	searchtitle = "%" + (request.form['search']) + "%"
+	print(searchtitle)
+	import sqlite3
+	connection = sqlite3.connect("twl.db")
+	connection.row_factory = sqlite3.Row
+	cursor = connection.cursor()
+	cursor.execute("SELECT * FROM library WHERE genre LIKE ?", (searchtitle,))
+	rows = cursor.fetchall()
+	return render_template('searchresults.html', rows=rows)
+# End Search
+
+# Writer's List
+@app.route('/home/makelist')
+def makelist():
+	return render_template('makelist.html')
 
 
-
-
-
-
-
-
-
-
+@app.route('/createlist/', methods=['POST'])
+def creatlist():
+	updatename = request.form['listname']
+	print(updatename)
+	import sqlite3
+	connection = sqlite3.connect("writerlists.db")
+	connection.row_factory = sqlite3.Row
+	cursor = connection.cursor()
+	#cursor.execute('''CREATE TABLE IF NOT EXISTS {} (ID integer, writerfirst text, writerlast text, title text)'''.format(listtitle))
+	cursor.execute('''CREATE TABLE IF NOT EXISTS tablename (ID integer, writerfirst text, writerlast text, title text)''')
+	connection.commit()
+	cursor.execute("ALTER TABLE tablename RENAME TO %s" %updatename)
+	connection.commit()
+	return render_template('writerlist.html')
 
 
 # Close Flask
