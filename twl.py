@@ -217,18 +217,34 @@ def makelist():
 
 @app.route('/createlist/', methods=['POST'])
 def creatlist():
-	updatename = request.form['listname']
-	print(updatename)
+	updatename = [request.form['listname']]
 	import sqlite3
-	connection = sqlite3.connect("writerlists.db")
+# Add Table to writerlists.db
+	wlconnection = sqlite3.connect("writerlists.db")
+	wlcursor = wlconnection.cursor()
+	wlcursor.execute('''CREATE TABLE IF NOT EXISTS tablename 
+		(ID integer, writerfirst text, writerlast text, title text)''')
+	wlconnection.commit()
+	wlcursor.execute("ALTER TABLE tablename RENAME TO %s" %updatename)
+	wlconnection.commit()
+# Add table name to writerlists.table
+	connection = sqlite3.connect("twl.db")
 	connection.row_factory = sqlite3.Row
 	cursor = connection.cursor()
-	#cursor.execute('''CREATE TABLE IF NOT EXISTS {} (ID integer, writerfirst text, writerlast text, title text)'''.format(listtitle))
-	cursor.execute('''CREATE TABLE IF NOT EXISTS tablename (ID integer, writerfirst text, writerlast text, title text)''')
+	cursor.execute("INSERT INTO writerlists (listname) VALUES (?)", (updatename))
 	connection.commit()
-	cursor.execute("ALTER TABLE tablename RENAME TO %s" %updatename)
-	connection.commit()
-	return render_template('writerlist.html')
+	return redirect('/listlists')
+
+@app.route('/listlists')
+def listlists():
+	import sqlite3
+	connection = sqlite3.connect("twl.db")
+	connection.row_factory = sqlite3.Row
+	cursor = connection.cursor()
+# Select names from 
+	cursor.execute("SELECT * FROM writerlists")
+	rows = cursor.fetchall()
+	return render_template('writerlist.html', rows=rows)
 
 
 # Close Flask
