@@ -151,7 +151,8 @@ def writerfirstsearch():
 	connection = sqlite3.connect("twl.db")
 	connection.row_factory = sqlite3.Row
 	cursor = connection.cursor()
-	cursor.execute("SELECT * FROM library WHERE writerfirst LIKE ?", (searchtitle,))
+	cursor.execute("SELECT * FROM library WHERE writerfirst LIKE ?", 
+		(searchtitle,))
 	rows = cursor.fetchall()
 	return render_template('searchresults.html', rows=rows)
 
@@ -164,7 +165,8 @@ def writerlastsearch():
 	connection = sqlite3.connect("twl.db")
 	connection.row_factory = sqlite3.Row
 	cursor = connection.cursor()
-	cursor.execute("SELECT * FROM library WHERE writerlast LIKE ?", (searchtitle,))
+	cursor.execute("SELECT * FROM library WHERE writerlast LIKE ?", 
+		(searchtitle,))
 	rows = cursor.fetchall()
 	return render_template('searchresults.html', rows=rows)
 
@@ -227,24 +229,35 @@ def creatlist():
 	wlconnection.commit()
 	wlcursor.execute("ALTER TABLE tablename RENAME TO %s" %updatename)
 	wlconnection.commit()
-# Add table name to writerlists.table
-	connection = sqlite3.connect("twl.db")
-	connection.row_factory = sqlite3.Row
-	cursor = connection.cursor()
-	cursor.execute("INSERT INTO writerlists (listname) VALUES (?)", (updatename))
-	connection.commit()
 	return redirect('/listlists')
 
 @app.route('/listlists')
 def listlists():
 	import sqlite3
-	connection = sqlite3.connect("twl.db")
-	connection.row_factory = sqlite3.Row
-	cursor = connection.cursor()
-# Select names from 
-	cursor.execute("SELECT * FROM writerlists")
-	rows = cursor.fetchall()
-	return render_template('writerlist.html', rows=rows)
+	wlconnection = sqlite3.connect("writerlists.db")
+	wlcursor = wlconnection.cursor()
+	wlconnection.row_factory = sqlite3.Row
+	wlcursor.execute("SELECT name FROM sqlite_schema WHERE type ='table' \
+		AND name NOT LIKE 'sqlite_%';")
+	items = wlcursor.fetchall()
+	for item in items:
+		print(item)
+	return render_template('writerlist.html', items=items)
+
+@app.route('/addtolist')
+def addtolist():
+	listname = ['Anal']
+	#print(listname)
+	writerfirst = "John"
+	writerlast = "Carpenter"
+	title = "The Thing"
+	import sqlite3
+	wlconnection = sqlite3.connect("writerlists.db")
+	wlcursor = wlconnection.cursor()
+	wlcursor.execute("INSERT INTO %s (writerfirst, writerlast, title) VALUES \
+		(?, ?, ?)" %listname, ("John", "Isom", "Mark's Movie")) 
+	wlconnection.commit()
+	return "Hi"
 
 
 # Close Flask
