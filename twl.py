@@ -242,22 +242,58 @@ def listlists():
 	items = wlcursor.fetchall()
 	for item in items:
 		print(item)
-	return render_template('writerlist.html', items=items)
+	return render_template('listlists.html', items=items)
 
-@app.route('/addtolist')
-def addtolist():
+@app.route('/setlistvariable/<listname>')
+def setlistvariable(listname):
+	session['writerlist']=listname
+	writerlist=session.get('writerlist')
+	print('-----------')
+	print(writerlist)
+	return 'ok'
+
+
+
+@app.route('/addtolist/<ID>')
+def addtolist(ID):
+	userid = ID
+	import sqlite3
+	connection = sqlite3.connect("twl.db")
+	connection.row_factory = sqlite3.Row
+	cursor = connection.cursor()
+	cursor.execute("SELECT * FROM library WHERE ID = ?", (userid,))
+	rows = cursor.fetchall()
+	for row in rows:
+		print(row[0])
 	listname = ['Anal']
 	#print(listname)
-	writerfirst = "John"
-	writerlast = "Carpenter"
-	title = "The Thing"
-	import sqlite3
+	writerfirst = (row['writerfirst'])
+	writerlast = (row['writerlast'])
+	title = (row['title'])
 	wlconnection = sqlite3.connect("writerlists.db")
 	wlcursor = wlconnection.cursor()
 	wlcursor.execute("INSERT INTO %s (writerfirst, writerlast, title) VALUES \
-		(?, ?, ?)" %listname, ("John", "Isom", "Mark's Movie")) 
+		(?, ?, ?)" %listname, (writerfirst, writerlast, title)) 
 	wlconnection.commit()
 	return "Hi"
+
+@app.route('/currentlist/<ID>')
+def currentlist(ID):
+	table = ['Anal']
+	import sqlite3
+	wlconnection = sqlite3.connect("writerlists.db")
+	wlconnection.row_factory = sqlite3.Row
+	wlcursor = wlconnection.cursor()
+	wlcursor.execute("SELECT * FROM %s" %table)
+	rows = wlcursor.fetchall()
+	for row in rows:
+		print(row[0])
+	#writerfirst = (row['writerfirst'])
+	#writerlast = (row['writerlast'])
+	#title = (row['title'])
+	#print(writerfirst)
+	return render_template('currentlist.html', rows=rows)
+
 
 
 # Close Flask

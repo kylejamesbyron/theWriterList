@@ -16,14 +16,27 @@
 
 <a href = "/editrecord/{{row['ID']}}">[edit record]</a><br>
 
-<a href = "/addtolist/{{row['ID']}}">[add to list]</a><br>
+
+{% endfor %}
+<br>NOTES:<br>
+{% for row in m %}
 
 
-<br>###<br>
 
+
+{{row['entrydate']}} -- {{row['message']}}<br><br>
 
 {% endfor %}
 
+{% for row in rows %}
+<form action="/newnote/{{row['ID']}}" method="post"> 
+    
+Note: <br><textarea cols="50" rows="4" name="message"></textarea>&nbsp;<br>
+ 
+  <input name="form" value="Save" type="submit"> 
+{% endfor %}
+
+</form>
 
 
 
