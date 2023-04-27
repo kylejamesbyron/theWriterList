@@ -15,18 +15,11 @@ app = Flask(__name__)
 app.secret_key = 'dljsaklqk24e21cjn!Ew@@dsa5'
 # End of opening
 
-# setup sqlite
-
-def sqlconnect():
-	import sqlite3
-	connection = sqlite3.connect("twl.db")
-	cursor = connection.cursor()
-# end sqlite setup
-
 # Home
 @app.route('/home/')
 def home():
-	return render_template('home.html')
+	writerlist = (session.get('writerlist'))
+	return render_template('home.html', writerlist=writerlist)
 
 # Log Screenplay
 @app.route('/home/logscreenplay/')
@@ -211,7 +204,7 @@ def genresearch():
 	return render_template('searchresults.html', rows=rows)
 # End Search
 
-# Writer's List
+# Writer's List\
 @app.route('/home/makelist')
 def makelist():
 	return render_template('makelist.html')
@@ -219,7 +212,8 @@ def makelist():
 
 @app.route('/createlist/', methods=['POST'])
 def creatlist():
-	updatename = [request.form['listname']]
+	listname = (request.form['listname'])
+	updatename = listname.replace(" ", "_")
 	import sqlite3
 # Add Table to writerlists.db
 	wlconnection = sqlite3.connect("writerlists.db")
@@ -250,7 +244,8 @@ def setlistvariable(listname):
 	writerlist=session.get('writerlist')
 	print('-----------')
 	print(writerlist)
-	return 'ok'
+	site = '/currentlist/' + writerlist
+	return redirect(site)
 
 
 
@@ -265,21 +260,23 @@ def addtolist(ID):
 	rows = cursor.fetchall()
 	for row in rows:
 		print(row[0])
-	listname = ['Anal']
-	#print(listname)
+	listname = (session.get('writerlist'))
+	print("-----")
+	print(listname)
 	writerfirst = (row['writerfirst'])
 	writerlast = (row['writerlast'])
 	title = (row['title'])
 	wlconnection = sqlite3.connect("writerlists.db")
 	wlcursor = wlconnection.cursor()
 	wlcursor.execute("INSERT INTO %s (writerfirst, writerlast, title) VALUES \
-		(?, ?, ?)" %listname, (writerfirst, writerlast, title)) 
+		(?, ?, ?)" %(listname), (writerfirst, writerlast, title)) 
 	wlconnection.commit()
-	return "Hi"
+	site = '/currentlist/' + listname
+	return redirect(site)
 
-@app.route('/currentlist/<ID>')
-def currentlist(ID):
-	table = ['Anal']
+@app.route('/currentlist/<listname>')
+def currentlist(listname):
+	table = listname
 	import sqlite3
 	wlconnection = sqlite3.connect("writerlists.db")
 	wlconnection.row_factory = sqlite3.Row
