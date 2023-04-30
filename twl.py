@@ -44,6 +44,14 @@ def logscreenplaysave():
 			creationdate) values (?, ?, ?, ?, ?, ?, ?, ?)', (title, writerfirst, \
 			writerlast, genre, starrating, logline, synopsis, creationdate))
 	connection.commit()
+	import sqlite3
+	wconnection = sqlite3.connect("writers.db")
+	wcursor = wconnection.cursor()
+	writername = writerfirst + writerlast
+	wcursor.execute("CREATE TABLE IF NOT EXISTS %s (title TEXT)" %writername)
+	wconnection.commit()
+	wcursor.execute("INSERT INTO %s (title) VALUES (?)" %writername, (title,))
+	wconnection.commit()
 	return render_template('home.html')
 
 
@@ -284,14 +292,49 @@ def currentlist(listname):
 	wlcursor.execute("SELECT * FROM %s" %table)
 	rows = wlcursor.fetchall()
 	for row in rows:
-		print(row[0])
-	#writerfirst = (row['writerfirst'])
-	#writerlast = (row['writerlast'])
-	#title = (row['title'])
-	#print(writerfirst)
+		print('mark')
 	return render_template('currentlist.html', rows=rows)
 
+@app.route('/viewwriter/<writerfirst>/<writerlast>')
+def viewwriter(writerfirst, writerlast):
+	import sqlite3
+	connection = sqlite3.connect("twl.db")
+	connection.row_factory = sqlite3.Row
+	cursor = connection.cursor()
+	#writerfirst = "Mark"
+	#writerlast = "Isom"
+	cursor.execute("SELECT * FROM library WHERE writerfirst LIKE ? AND writerlast LIKE ?", 
+		(writerfirst, writerlast,))
+	rows = cursor.fetchall()
+	print(writerfirst + ' ' + writerlast)
+	wconnection = sqlite3.connect("writers.db")
+	wconnection.row_factory = sqlite3.Row
+	wcursor = wconnection.cursor()
+	writername = writerfirst + writerlast
+	#writername = "MarkIsom"
+	wcursor.execute("SELECT * FROM %s" %writername)
+	titles = wcursor.fetchall()
+	for row in titles:
+		print([titles])
+		print('-----------')
+	return render_template('viewwriter.html', rows=rows, titles=titles, writerfirst=writerfirst, writerlast=writerlast)
 
+@app.route('/addtowriterlist', methods=['POST'])
+def addtowriterlist():
+	import sqlite3
+	listname = (session.get('writerlist'))
+	print("-----")
+	print(listname)
+	writerfirst = request.form['writerfirst']
+	writerlast = request.form['writerlast']
+	title = request.form['credits']
+	wlconnection = sqlite3.connect("writerlists.db")
+	wlcursor = wlconnection.cursor()
+	wlcursor.execute("INSERT INTO %s (writerfirst, writerlast, title) VALUES \
+		(?, ?, ?)" %(listname), (writerfirst, writerlast, title)) 
+	wlconnection.commit()
+	site = '/currentlist/' + listname
+	return redirect(site)
 
 # Close Flask
 if __name__ == '__main__':

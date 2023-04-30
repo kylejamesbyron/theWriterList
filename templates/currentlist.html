@@ -8,20 +8,7 @@
 
 {% for row in rows %}
 
-<table style="text-align: left; width: 100%;" border="1" cellpadding="2"
-cellspacing="2">
-<tbody>
-<tr>
-<td style="vertical-align: top;"><br>
-{{row['writerfirst']}} {{row['writerlast']}}
-</td>
-<td style="vertical-align: top;"><br>
-{{row['title']}}
-</td>
-
-</tr>
-</tbody>
-</table>
+{{row['writerfirst']}} {{row['writerlast']}} - {{row['title']}}<br><br>
 
 
  
