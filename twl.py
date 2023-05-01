@@ -227,7 +227,8 @@ def creatlist():
 	wlconnection = sqlite3.connect("writerlists.db")
 	wlcursor = wlconnection.cursor()
 	wlcursor.execute('''CREATE TABLE IF NOT EXISTS tablename 
-		(ID integer, writerfirst text, writerlast text, title text)''')
+		(ID integer, writerfirst text, writerlast text, title text, 
+			agent text, available text)''')
 	wlconnection.commit()
 	wlcursor.execute("ALTER TABLE tablename RENAME TO %s" %updatename)
 	wlconnection.commit()
@@ -255,33 +256,6 @@ def setlistvariable(listname):
 	site = '/currentlist/' + writerlist
 	return redirect(site)
 
-
-
-@app.route('/addtolist/<ID>')
-def addtolist(ID):
-	userid = ID
-	import sqlite3
-	connection = sqlite3.connect("twl.db")
-	connection.row_factory = sqlite3.Row
-	cursor = connection.cursor()
-	cursor.execute("SELECT * FROM library WHERE ID = ?", (userid,))
-	rows = cursor.fetchall()
-	for row in rows:
-		print(row[0])
-	listname = (session.get('writerlist'))
-	print("-----")
-	print(listname)
-	writerfirst = (row['writerfirst'])
-	writerlast = (row['writerlast'])
-	title = (row['title'])
-	wlconnection = sqlite3.connect("writerlists.db")
-	wlcursor = wlconnection.cursor()
-	wlcursor.execute("INSERT INTO %s (writerfirst, writerlast, title) VALUES \
-		(?, ?, ?)" %(listname), (writerfirst, writerlast, title)) 
-	wlconnection.commit()
-	site = '/currentlist/' + listname
-	return redirect(site)
-
 @app.route('/currentlist/<listname>')
 def currentlist(listname):
 	table = listname
@@ -303,7 +277,8 @@ def viewwriter(writerfirst, writerlast):
 	cursor = connection.cursor()
 	#writerfirst = "Mark"
 	#writerlast = "Isom"
-	cursor.execute("SELECT * FROM library WHERE writerfirst LIKE ? AND writerlast LIKE ?", 
+	cursor.execute("SELECT * FROM library WHERE writerfirst \
+		LIKE ? AND writerlast LIKE ?", 
 		(writerfirst, writerlast,))
 	rows = cursor.fetchall()
 	print(writerfirst + ' ' + writerlast)
@@ -317,7 +292,8 @@ def viewwriter(writerfirst, writerlast):
 	for row in titles:
 		print([titles])
 		print('-----------')
-	return render_template('viewwriter.html', rows=rows, titles=titles, writerfirst=writerfirst, writerlast=writerlast)
+	return render_template('viewwriter.html', rows=rows,
+		titles=titles, writerfirst=writerfirst, writerlast=writerlast)
 
 @app.route('/addtowriterlist', methods=['POST'])
 def addtowriterlist():
