@@ -1,0 +1,25 @@
+DATABASES
+	writers
+		WRITERS
+			ID
+			name
+			credits
+			agent
+			avail
+		notes
+	credits
+		WRITERNAME
+			title
+			year
+			produced
+	screenplays
+		screenplays
+			ID
+			title
+			name
+			logline
+			synopsis
+			genre
+			rating
+			produced
+		notes

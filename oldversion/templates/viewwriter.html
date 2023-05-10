@@ -5,21 +5,19 @@
 
 
 {% block content %}
-
-{% for row in rows %}
 <form action="/addtowriterlist" method="post">
-<textarea cols="20" rows="1" name="writerfirst">{{row['name']}} </textarea>&nbsp;  - 
-<textarea cols="30" rows="3" name="credits">{{row['credits']}}</textarea>&nbsp;
+<textarea cols="10" rows="1" name="writerfirst">{{writerfirst}} </textarea>&nbsp; 
+<textarea cols="10" rows="1" name="writerlast">{{writerlast}} </textarea>&nbsp; - 
+<textarea cols="30" rows="3" name="credits">{% for row in titles %}{{row[0]}}, {% endfor %}</textarea>&nbsp;
  <input name="form" value="Add to List" type="submit"></form>
 <br><br>
 
-{% endfor %}
 
 
-{% for row in screenplays %}
+{% for row in rows %}
 
   {{row['title']}}<br> 
-  by {{row['name']}}<br>
+  by {{row['writerfirst']}} {{row['writerlast']}}<br>
   "{{row['logline']}}"<br>
   <br>
   {{row['synopsis']}}<br><br>

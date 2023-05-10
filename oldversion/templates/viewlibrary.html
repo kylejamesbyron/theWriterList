@@ -10,7 +10,7 @@
 {% for row in rows %}<br>
 
   {{row['title']}}<br>
-  by {{row['name']}}<br>
+  by {{row['writerfirst']}} {{row['writerlast']}}<br>
   {{row['logline']}}<br>
 
   <a href = "/viewrecord/{{row['ID']}}">View Record</a><br>

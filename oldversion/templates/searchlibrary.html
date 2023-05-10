@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  <title></title>
+
+  
+</head><body>
+{% extends 'base.html' %}
+<br>
+
+<br>
+
+{% block content %}
+SEARCH BY:
+
+<form action="/titlesearch" method="post"> 
+    
+  Title: <textarea cols="25" rows="1" name="search"></textarea>&nbsp;
+
+  <input name="form" value="Search" type="submit"><br> 
+  </form>
+
+<form action="/writerfirstsearch" method="post"> 
+    
+  First Name: <textarea cols="25" rows="1" name="search"></textarea>&nbsp;
+
+  <input name="form" value="Search" type="submit"><br>
+  </form>
+
+<form action="/writerlastsearch" method="post"> 
+    
+  Last Name: <textarea cols="25" rows="1" name="search"></textarea>&nbsp;
+
+  <input name="form" value="Search" type="submit"><br>
+  </form>
+
+<form action="/loglinesearch" method="post"> 
+    
+  Logline: <textarea cols="25" rows="1" name="search"></textarea>&nbsp;
+
+  <input name="form" value="Search" type="submit"><br>
+
+</form>
+
+<form action="/synopsissearch" method="post"> 
+    
+  Synopsis: <textarea cols="25" rows="1" name="search"></textarea>&nbsp;
+
+  <input name="form" value="Search" type="submit"><br>
+
+</form>
+
+<form action="/genresearch" method="post"> 
+Genre:
+  <select name="search" id="genre">
+  <option value="genre">genre</option>
+  <option value="comedy">comedy</option>
+  <option value="romance">romance</option>
+  <option value="action">action</option>
+</select>
+<input name="form" value="Search" type="submit"><br>
+</form>
+
+{% endblock %}
+

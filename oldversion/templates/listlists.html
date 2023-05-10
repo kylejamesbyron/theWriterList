@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+
+
+ 
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+Choose List to Edit or View below:
+
+{% for row in items %}
+
+<br><br>{{row[0]}}-
+<a href = "/setlistvariable/{{row[0]}}">[Edit]</a><br>
+
+{% endfor %}
+
+
+
+
+
+
+
+
+{% endblock %}

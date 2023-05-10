@@ -12,16 +12,8 @@
 <form action="/updaterecord/{{userid}}" method="post"> 
     
   Title: <br><textarea cols="25" rows="1" name="title">{{row['title']}} </textarea>&nbsp;<br>
-  Writer's Name: <br><textarea cols="25" rows="1" name="name">{{row['name']}} </textarea>&nbsp;<br> 
-  Genre:
-  <select name="genre" id="genre">
-  <option value="genre">{{row['genre']}}</option>
-  <option value="comedy">comedy</option>
-  <option value="romance">romance</option>
-  <option value="action">action</option>
-  </select>[add]&nbsp;<br>
-  Rating:  <br><textarea cols="25" rows="1" name="rating">{{row['rating']}}</textarea>&nbsp;<br>
-  Year Produced:  <br><textarea cols="25" rows="1" name="year">{{row['year']}}</textarea>&nbsp;<br>
+  Writer's First Name: <br><textarea cols="25" rows="1" name="writerfirst">{{row['writerfirst']}} </textarea>&nbsp;<br> 
+  Writer's Last Name: <br><textarea cols="25" rows="1" name="writerlast">{{row['writerlast']}} </textarea>&nbsp;<br>
   Logline: <br><textarea cols="50" rows="2" name="logline">{{row['logline']}}</textarea>&nbsp;<br>
   Synopsis: <br><textarea cols="50" rows="25" name="synopsis">{{row['synopsis']}}</textarea>&nbsp;<br>
   

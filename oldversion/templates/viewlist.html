@@ -9,17 +9,13 @@
 {% for row in rows %}
 
   {{row['title']}}<br> 
-  by {{row['name']}}<br>
-  Genre: {{row['genre']}}<br>
-  Rating: {{row['rating']}}/10
-  Produced: {{row['year']}}<br>
-  Logged:  {{row['creationdate']}}<br>
+  by {{row['writerfirst']}} {{row['writerlast']}}<br>
   "{{row['logline']}}"<br>
   <br>
   {{row['synopsis']}}<br><br>
 
 <a href = "/editrecord/{{row['ID']}}">[edit record]</a><br>
-<a href = "/viewwriter/{{formatname}}">[view writer]</a><br>
+
 
 {% endfor %}
 <br>NOTES:<br>
